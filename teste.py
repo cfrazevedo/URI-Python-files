@@ -1,10 +1,7 @@
-for c in range (1,128):
-    print(c, end=" ")
-    if c % 4 == 1:
-        print('w')
-    elif c % 4 == 2:
-        print('x')
-    elif c % 4 == 3:
-        print('y')
-    elif c % 4 == 0:
-        print('z')
+for linha in range(0, 12):
+    for coluna in range(0, 12):
+        if coluna < linha and coluna + linha < 11:
+            print("X", end=' ')
+        else:
+            print(' ', end=' ')
+    print()
