@@ -1,0 +1,13 @@
+linha1 = input().split()
+o1 = int(linha1[0])
+o2 = int(linha1[1])
+o3 = int(linha1[2])
+on = [o1, o2, o3]
+oc = sorted(on)
+print(oc[0])
+print(oc[1])
+print(oc[2])
+print()
+print(on[0])
+print(on[1])
+print(on[2])
