@@ -2,7 +2,6 @@ while True:
     try:
         n, m = [int(x) for x in input().split()]
         l = [[int(x) for x in input().split()] for c in range(n)]
-        t = []
         for i in range(n):
             ij = []
             for j in range(m):
@@ -19,8 +18,6 @@ while True:
                     if j + 1 < m and l[i][j + 1] == 1:
                         p += 1
                 ij.append(p)
-            t.append(ij[:])
-        for d in t:
-            print(*d, sep='')
+            print(*ij, sep='')
     except EOFError:
         break
