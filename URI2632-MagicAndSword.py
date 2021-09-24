@@ -10,8 +10,7 @@ for c in range(t):
     w, h, xo, yo = [int(x) for x in input().split()]
     mag, *resto = input().split()
     n, cx, cy = [int(x) for x in resto]
-    dist = 0
-    dn = 0
+    dist = dn = 0
 
     if cx < xo:
         if cy < yo:
