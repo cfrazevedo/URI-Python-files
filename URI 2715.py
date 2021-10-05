@@ -6,15 +6,13 @@ while True:
     try:
         n = int(input())
         x = [int(z) for z in input().split()]
-        s = sum(x)
-        g = 0
-        for _ in range(n - 1):
-            if g < sum(x):
-                g += x.pop()
+        y = 0
+        for c in range(1, n):
+            d = abs(sum(x[:c]) - sum(x[c:]))
+            if c == 1 or d < y:
+                y = d
             else:
                 break
-        r = s - g
-        y = abs(g - r)
         print(y)
     except EOFError:
         break
