@@ -8,7 +8,7 @@ while True:
         x = [int(z) for z in input().split()]
         s = sum(x)
         g = 0
-        for _ in range(len(x) - 1):
+        for _ in range(n - 1):
             if g < sum(x):
                 g += x.pop()
             else:
