@@ -1,5 +1,5 @@
 n = int(input())
-for c in range(n):
+for _ in range(n):
     x = bin(int(input()))[2:]
     s = q = 0
     for c in x:
