@@ -2,7 +2,7 @@ for c in range(20):
     if c == 0 or c == 2 or c == 19:
         print('-' * 39)
     elif c == 1:
-        print('| decimal   |  octal  |  Hexadecimal  |')
+        print('|  decimal  |  octal  |  Hexadecimal  |')
     else:
         x = c - 3
         if len(oct(x)[2:]) == 2:
