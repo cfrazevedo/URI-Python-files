@@ -32,7 +32,7 @@ class Grafo:
     def darPasso(self, i, p):
         if p == 0:
             if 0 in self.grafo[i]:
-                self.caminhos += self.grafo[i].count(0)
+                self.caminhos += 1
         else:
             for c in self.grafo[i]:
                 self.darPasso(c, p - 1)
