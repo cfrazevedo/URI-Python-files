@@ -1,4 +1,5 @@
 # NÃO RESOLVIDO
+# TIME LIMITED EXCEEDED
 
 class Grafo:
 
@@ -41,33 +42,34 @@ class Grafo:
 
 n = int(input())
 nv = 1
+limites = []
 for c in range(int((n / 2) + 1)):
     nv += 6 * c
+    limites.append(nv)
 g = Grafo(nv, n)
 for d in range(n):
     if d == 1:
         for e in range(6):
             g.adiciona_aresta(0, e + 1)
     elif d != 0 and d % 2 == 0:
-        for e in range(6 * int((d - 1) / 2) + 1, 6 * int(d - 1)):
+        a = limites[(d // 2) - 1]
+        b = limites[d // 2] - 1
+        for e in range(a, b):
             g.adiciona_aresta(e, e + 1)
-        g.adiciona_aresta(6 * int(d - 1), 6 * int((d - 1) / 2) + 1)
+        g.adiciona_aresta(a, b)
     elif d % 2 == 1:
-        print(d)
-        p = 6 * ((d - 2) // 2) + 1
-        u = 6 * (d - 2)
-        s = 0
+        p = limites[(d // 2) - 1]
+        u = limites[d // 2] - 1
+        s = p + (6 * (d//2))
         for e in range(p, u + 1):
-            print(f's = {s}')
-            g.adiciona_aresta(e, e + s + u)
-            g.adiciona_aresta(e, e + s + u + 1)
+            g.adiciona_aresta(e, s)
             if e != p:
-                g.adiciona_aresta(e, e + s + u - 1)
+                g.adiciona_aresta(e, s - 1)
+            if (e - 1) % (d // 2) == 0:
+                g.adiciona_aresta(e, s + 1)
+                s += 1
             s += 1
-        g.adiciona_aresta(p, d * 6)
+        g.adiciona_aresta(p, s - 1)
 
-print(g.vertices)
-g.mostra_matriz()
-print(g.contar_adj())
 g.passear()
 print(g.caminhos)
