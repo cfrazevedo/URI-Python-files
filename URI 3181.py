@@ -1,3 +1,5 @@
+# NÃO RESOLVIDO - WRONG ANSWER
+
 n, c = map(int, input().split())
 encontros = {}
 for _ in range(c):
