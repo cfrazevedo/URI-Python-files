@@ -1,5 +1,5 @@
 """
-NÃO RESOLVIDO - TIME LIMIT ERROR
+URI (BEE) 3204 - NÃO RESOLVIDO - TIME LIMIT ERROR
 
 Não sei como resolve este exercício sem analisar todos os caminhos percorridos pela larva.
 O código abaixo faz isso e chega nos resultados esperados, entretanto gasta muito tempo e
@@ -13,8 +13,12 @@ O programa que recebe o aceite do BEE(URI) vou disponibilizar em 'URI 3204(1).py
 """
 
 
-class Grafo:  # este grafo ira delinear os caminhos pelo favo
-    # ele deve ser composto, não direcionado, regular, de arestas paralelas e sem laço
+class Grafo:
+    """
+    Este grafo ira delinear os caminhos pelo favo
+
+    Ele deve ser composto, não direcionado, regular e sem laço.
+    """
 
     def __init__(self, vertices, passos, limites):
         self.vertices = vertices
@@ -23,14 +27,26 @@ class Grafo:  # este grafo ira delinear os caminhos pelo favo
         self.grafo = [[] for _ in range(self.vertices)]
         self.limites = limites
 
-    def adiciona_aresta(self, x, v):  # algoritmo de arestas paralelas
+    def adiciona_aresta(self, x, v):
+        """
+        Algoritmo de formação de arestas
+
+        :param x: Vértice 1
+        :param v: Vértice 2
+        """
         self.grafo[x].append(v)
         self.grafo[v].append(x)
 
-    def passear(self, p, i=0):  # analisando os caminhos
-        if p == 1:  # cada caminho onde o vértice tem aresta para #0 e falta um passo é registrado
-            if 0 in self.grafo[i]:
-                self.caminhos += 1
+    def passear(self, p, i=0):
+        '''
+        Analisando os caminhos
+        
+        :param p: número de passos a percorrer
+        :param i: casa (vértice) onde a larva se encontra
+        '''
+        if p == 1:  # faltando um passo para ternimar o caminho
+            if 0 in self.grafo[i]:  # se o vértice tem aresta para #0
+                self.caminhos += 1  # é registrado
         else:  # passo por passo analisado
             try:
                 l = self.limites[p]
@@ -51,19 +67,13 @@ for _ in range(t):
     for c in range(int((n / 2) + 1)):
         nro_vertices += 6 * c
         limites.append(nro_vertices)
-    g = Grafo(nro_vertices, n, limites)  # criação do grafo
+    g = Grafo(nro_vertices, n, limites)
+    # criação do grafo - rede de casas (vértices) e suas paredes (arestas)
 
     for d in range(n):  # criando as arestas do grafo
-        if d == 1:  # o vértice original #0 deve se ligar com os seis externos imediatos (#1 a #6)
+        if d == 1:  # o vértice original #0 se liga com os seis externos imediatos (#1 a #6)
             for e in range(6):
                 g.adiciona_aresta(0, e + 1)
-
-        elif d != 0 and d % 2 == 0:  # os vértices externos se ligar com seus vizinhos externos
-            a = limites[(d // 2) - 1]
-            b = limites[d // 2] - 1
-            for e in range(a, b):
-                g.adiciona_aresta(e, e + 1)
-            g.adiciona_aresta(a, b)
 
         elif d % 2 == 1:  # os vértices externos se ligam com seus vizinhos internos imediatos
             p = limites[(d // 2) - 1]
@@ -78,6 +88,13 @@ for _ in range(t):
                     s += 1
                 s += 1
             g.adiciona_aresta(p, s - 1)
+
+        elif d != 0 and d % 2 == 0:  # os vértices externos se ligar com seus vizinhos externos
+            a = limites[(d // 2) - 1]
+            b = limites[d // 2] - 1
+            for e in range(a, b):
+                g.adiciona_aresta(e, e + 1)
+            g.adiciona_aresta(a, b)
 
     g.passear(n)  # iniciando a analise de todos os caminhos até o retorno a #0 com n passos
     print(g.caminhos)  # imprime o número de caminhos que retornam a #0 com n passos
