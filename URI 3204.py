@@ -1,12 +1,12 @@
 """
 URI (BEE) 3204 - NÃO RESOLVIDO - TIME LIMIT ERROR
 
-Não sei como resolve este exercício sem analisar todos os caminhos percorridos pela larva.
+Não sei como resolve este exercício sem analisar todos os passeios percorridos pela larva.
 O código abaixo faz isso e chega nos resultados esperados, entretanto gasta muito tempo e
 memória (Time Limit Error). Meu PC levou mais de 1h para processar os limítrofes 14 passos.
 
 Vi alguns devs resolvendo este problema associando diretamente o número de passos com o
-número de caminhos, sem analisar cada caminho, ou seja, não resolve o problema.
+número de passeios, sem analisar cada passeio, ou seja, não resolve o problema.
 
 Como o número máximo de passos é 14, fica fácil receber o aceite do julgamento.
 O programa que recebe o aceite do BEE(URI) vou disponibilizar em 'URI 3204(1).py'
@@ -15,7 +15,7 @@ O programa que recebe o aceite do BEE(URI) vou disponibilizar em 'URI 3204(1).py
 
 class Grafo:
     """
-    Este grafo ira delinear os caminhos pelo favo
+    Este grafo ira delinear os passeios pelo favo
 
     Ele deve ser composto, não direcionado, regular e sem laço.
     """
@@ -23,7 +23,7 @@ class Grafo:
     def __init__(self, vertices, passos, limites):
         self.vertices = vertices
         self.passos = passos
-        self.caminhos = 0  # caminhos que retornam ao vértice original #0
+        self.passeios = 0  # passeios que retornam ao vértice original #0
         self.grafo = [[] for _ in range(self.vertices)]
         self.limites = limites
 
@@ -44,15 +44,15 @@ class Grafo:
         :param p: número de passos a percorrer
         :param i: casa (vértice) onde a larva se encontra
         '''
-        if p == 1:  # faltando um passo para ternimar o caminho
+        if p == 1:  # faltando um passo para ternimar o passeio
             if 0 in self.grafo[i]:  # se o vértice tem aresta para #0
-                self.caminhos += 1  # é registrado
+                self.passeios += 1  # é registrado
         else:  # passo por passo analisado
             try:
                 l = self.limites[p]
             except:
                 l = self.vertices
-            if i < l:  # o "l" impede (otimiza) a análise de caminhos q não retornam a #0 com passos restantes
+            if i < l:  # o "l" impede (otimiza) a análise de passeios q não retornam a #0 com passos restantes
                 for c in self.grafo[i]:
                     if c < l:
                         self.passear(p - 1, c)
@@ -68,7 +68,7 @@ for _ in range(t):
         nro_vertices += 6 * c
         limites.append(nro_vertices)
     g = Grafo(nro_vertices, n, limites)
-    # criação do grafo - rede de casas (vértices) e suas paredes (arestas)
+    # criação do grafo - rede de casas (vértices) e suas conexões (arestas)
 
     for d in range(n):  # criando as arestas do grafo
         if d == 1:  # o vértice original #0 se liga com os seis externos imediatos (#1 a #6)
@@ -96,5 +96,5 @@ for _ in range(t):
                 g.adiciona_aresta(e, e + 1)
             g.adiciona_aresta(a, b)
 
-    g.passear(n)  # iniciando a analise de todos os caminhos até o retorno a #0 com n passos
-    print(g.caminhos)  # imprime o número de caminhos que retornam a #0 com n passos
+    g.passear(n)  # iniciando a analise de todos os passeios até o retorno a #0 com n passos
+    print(g.passeios)  # imprime o número de passeios que retornam a #0 com n passos
